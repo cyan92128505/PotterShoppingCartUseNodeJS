@@ -1,0 +1,29 @@
+{
+  "name": "PotterShoppingCartUseNodejs",
+  "version": "1.0.0",
+  "description": "Use TDD In Node.JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/PotterShoppingCart.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyan92128505/PotterShoppingCartUseNodeJS.git"
+  },
+  "keywords": [
+    "tdd",
+    "homework",
+    "mocha"
+  ],
+  "author": "cyan92128505",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cyan92128505/PotterShoppingCartUseNodeJS/issues"
+  },
+  "homepage": "https://github.com/cyan92128505/PotterShoppingCartUseNodeJS#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.0.1",
+    "mocha": "^3.4.2"
+  }
+}
