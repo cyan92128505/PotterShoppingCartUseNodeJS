@@ -106,6 +106,21 @@ describe('PotterShoppingCart', () => {
             expect(actual).to.equal(expected);
         });
     });
+
+        it('買了0本，價格應為100*0 = 0', () => {
+        // arrange
+        var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
+
+        PotterShoppingCart([], bookStore, (target) => {
+            var expected = 0;
+
+            // act
+            var actual = target;
+
+            // assert
+            expect(actual).to.equal(expected);
+        });
+    });
 });
 
 var bookStore = {
