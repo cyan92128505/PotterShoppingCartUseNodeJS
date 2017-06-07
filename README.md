@@ -1,8 +1,12 @@
 # PotterShoppingCartUseNodeJS
 Use TDD In Node.JS
 
-
-## First Install Package
+## Preinstall
 ```
-    npm install
+npm install mocha -g
+```
+
+## Install
+```
+npm install
 ```
