@@ -21,7 +21,9 @@
     "url": "https://github.com/cyan92128505/PotterShoppingCartUseNodeJS/issues"
   },
   "homepage": "https://github.com/cyan92128505/PotterShoppingCartUseNodeJS#readme",
-  "dependencies": {},
+  "dependencies": {
+    "async": "^2.4.1"
+  },
   "devDependencies": {
     "chai": "^4.0.1",
     "mocha": "^3.4.2"

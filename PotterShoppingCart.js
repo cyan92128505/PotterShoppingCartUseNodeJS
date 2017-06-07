@@ -1,41 +1,37 @@
-var PotterBookInfoList = [{
-        name: '哈利波特第一集',
-        number: 0
-    },
-    {
-        name: '哈利波特第二集',
-        number: 0
-    },
-    {
-        name: '哈利波特第三集',
-        number: 0
-    },
-    {
-        name: '哈利波特第四集',
-        number: 0
-    },
-    {
-        name: '哈利波特第五集',
-        number: 0
-    }
-];
+const async = require('async');
+const clone = require('./clone');
 
+function PotterShoppingCart(_cart, _bookStore, response) {
+    var cart = clone(_cart);
+    var bookStore = clone(_bookStore);
 
-function PotterShoppingCart(Cart, callback) {
-    var sum = 0;
-    Cart.forEach((cartValue, index) => {
-        PotterBookInfoList.forEach((book) => {
-            if (book.name === cartValue) {
-                book.number++;
+    async.waterfall([
+        // 計算各書本的購買量
+        (asyncCallback) => {
+            // 遍歷購物車
+            for (let i = 0; i < cart.length; i++) {
+                for (let j = 0; j < bookStore.books.length; j++) {
+                    if (bookStore.books[j].name === cart[i]) {
+                        bookStore.books[j].number = bookStore.books[j].number + 1;
+                    }
+                };
+                if ((i + 1) === cart.length) {
+                    asyncCallback(bookStore);
+                }
             }
-        });
-    });
+        }
+    ], (bookStore) => {
+        for (let i = 0; i < bookStore.books.length; i++) {
+            if (bookStore.books[i].number) {
+                bookStore.moneySum = bookStore.moneySum + bookStore.books[i].number * bookStore.books[i].price;
+            }
 
-    PotterBookInfoList.forEach((book)=>{
-        sum = sum + book.number*100;
+            if ((i + 1) === bookStore.books.length) {
+                console.log(JSON.stringify(bookStore, null, 4));
+                response(bookStore.moneySum);
+            }
+        }
     });
-
-    return sum;
 }
 
 module.exports = PotterShoppingCart;
