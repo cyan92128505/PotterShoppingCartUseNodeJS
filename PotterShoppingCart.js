@@ -16,21 +16,23 @@ function PotterShoppingCart(_cart, _bookStore, response) {
                     }
                 };
                 if ((i + 1) === cart.length) {
-                    asyncCallback(bookStore);
+                    asyncCallback();
+                }
+            }
+        },
+        (asyncCallback) => {
+            for (let i = 0; i < bookStore.books.length; i++) {
+                if (bookStore.books[i].number) {
+                    bookStore.moneySum = bookStore.moneySum + bookStore.books[i].number * bookStore.books[i].price;
+                }
+
+                if ((i + 1) === bookStore.books.length) {
+                    asyncCallback(bookStore.moneySum);
                 }
             }
         }
-    ], (bookStore) => {
-        for (let i = 0; i < bookStore.books.length; i++) {
-            if (bookStore.books[i].number) {
-                bookStore.moneySum = bookStore.moneySum + bookStore.books[i].number * bookStore.books[i].price;
-            }
-
-            if ((i + 1) === bookStore.books.length) {
-                console.log(JSON.stringify(bookStore, null, 4));
-                response(bookStore.moneySum);
-            }
-        }
+    ], (moneySum) => {
+        response(moneySum);
     });
 }
 

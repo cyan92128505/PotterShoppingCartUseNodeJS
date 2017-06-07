@@ -31,5 +31,5 @@ PotterShoppingCart(
             }
         ]
     }, (target) => {
-        console.log(target);
+        console.log('result: '+target);
     });
