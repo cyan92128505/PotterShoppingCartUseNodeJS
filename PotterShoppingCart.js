@@ -1,6 +1,5 @@
 
-function PotterShoppingChat (){
-    return 'PotterShoppingChat';
+function PotterShoppingCart (){
 }
 
-module.exports = PotterShoppingChat;
+module.exports = PotterShoppingCart;
