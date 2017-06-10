@@ -6,7 +6,7 @@ describe('PotterShoppingCart', () => {
         // arrange
         var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
 
-        PotterShoppingCart(['哈利波特第一集'], bookStore, (target) => {
+        PotterShoppingCart(['哈利波特第一集'], bookStore, clerk, (target) => {
             var expected = 100;
 
             // act
@@ -21,7 +21,7 @@ describe('PotterShoppingCart', () => {
         // arrange
         var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
 
-        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集'], bookStore, (target) => {
+        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集'], bookStore, clerk, (target) => {
             var expected = 190;
 
             // act
@@ -36,7 +36,7 @@ describe('PotterShoppingCart', () => {
         // arrange
         var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
 
-        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第三集'], bookStore, (target) => {
+        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第三集'], bookStore, clerk, (target) => {
             var expected = 270;
 
             // act
@@ -51,7 +51,7 @@ describe('PotterShoppingCart', () => {
         // arrange
         var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
 
-        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第三集', '哈利波特第四集'], bookStore, (target) => {
+        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第三集', '哈利波特第四集'], bookStore, clerk, (target) => {
             var expected = 320;
 
             // act
@@ -66,7 +66,7 @@ describe('PotterShoppingCart', () => {
         // arrange
         var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
 
-        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第三集', '哈利波特第四集', '哈利波特第五集'], bookStore, (target) => {
+        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第三集', '哈利波特第四集', '哈利波特第五集'], bookStore, clerk, (target) => {
             var expected = 375;
 
             // act
@@ -81,7 +81,7 @@ describe('PotterShoppingCart', () => {
         // arrange
         var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
 
-        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第三集', '哈利波特第三集'], bookStore, (target) => {
+        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第三集', '哈利波特第三集'], bookStore, clerk, (target) => {
             var expected = 370;
 
             // act
@@ -96,7 +96,7 @@ describe('PotterShoppingCart', () => {
         // arrange
         var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
 
-        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第二集', '哈利波特第三集', '哈利波特第三集'], bookStore, (target) => {
+        PotterShoppingCart(['哈利波特第一集', '哈利波特第二集', '哈利波特第二集', '哈利波特第三集', '哈利波特第三集'], bookStore, clerk, (target) => {
             var expected = 460;
 
             // act
@@ -107,11 +107,11 @@ describe('PotterShoppingCart', () => {
         });
     });
 
-        it('買了0本，價格應為100*0 = 0', () => {
+    it('買了0本，價格應為100*0 = 0', () => {
         // arrange
         var PotterShoppingCart = require(path.join(process.cwd(), 'PotterShoppingCart.js'));
 
-        PotterShoppingCart([], bookStore, (target) => {
+        PotterShoppingCart([], bookStore, clerk, (target) => {
             var expected = 0;
 
             // act
@@ -151,4 +151,11 @@ var bookStore = {
             price: 100
         }
     ]
+};
+
+var clerk = {
+    // 各數量套書的折扣表 (i+1)本不同時的折扣
+    bonus: [1, 0.95, 0.9, 0.8, 0.75],
+    // 各套書數量
+    number: [0, 0, 0, 0, 0]
 };

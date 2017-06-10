@@ -1,19 +1,14 @@
 const async = require('async');
 const clone = require('./clone');
 
-function PotterShoppingCart(_cart, _bookStore, responseCallback) {
+function PotterShoppingCart(_cart, _bookStore, _clerk, responseCallback) {
     // 購物車
     var cart = clone(_cart);
 
     // 書局
     var bookStore = clone(_bookStore);
 
-    var package = {
-        // 各數量套書的折扣表 (i+1)本不同時的折扣
-        bonus:  [ 1, 0.95, 0.9, 0.8, 0.75 ],
-        // 各套書數量
-        number: [0, 0, 0, 0, 0]
-    };
+    var clerk =clone(_clerk);
 
     async.waterfall([
         // 計算各書本的購買量
@@ -40,15 +35,15 @@ function PotterShoppingCart(_cart, _bookStore, responseCallback) {
             callback();
         },
         (callback) => {
-            for (let i = 0; i < package.bonus.length; i++) {
+            for (let i = 0; i < clerk.bonus.length; i++) {
                 // 收集第i數量、該數量為為n-i不同書籍的數量
-                package.number[i] = bookStore.books[i].number;
+                clerk.number[i] = bookStore.books[i].number;
                 for (let j = 0; j < bookStore.books.length; j++) {
                     // 排除被安排套書後的剩餘的書
-                    bookStore.books[j].number = bookStore.books[j].number - package.number[i];
+                    bookStore.books[j].number = bookStore.books[j].number - clerk.number[i];
                 }
 
-                if ((i + 1) === package.bonus.length) {
+                if ((i + 1) === clerk.bonus.length) {
                     callback();
                 }
             }
@@ -58,13 +53,13 @@ function PotterShoppingCart(_cart, _bookStore, responseCallback) {
             var moneySum = 0;
             
             // 轉置套書數量總表
-            package.number = package.number.reverse();
+            clerk.number = clerk.number.reverse();
 
             // 每i+1項為i+1套書的數量，數量*(i+1)套*100元*(i+1)套的折扣
-            for (let i = 0; i < package.number.length; i++) {
-                moneySum = moneySum + 100 * (i + 1) * package.number[i] * package.bonus[i];
+            for (let i = 0; i < clerk.number.length; i++) {
+                moneySum = moneySum + 100 * (i + 1) * clerk.number[i] * clerk.bonus[i];
 
-                if ((i + 1) === package.number.length) {
+                if ((i + 1) === clerk.number.length) {
                     callback(moneySum);
                 }
             }
