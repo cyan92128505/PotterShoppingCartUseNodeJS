@@ -8,6 +8,7 @@ function PotterShoppingCart(_cart, _bookStore, _clerk, responseCallback) {
     // 書局
     var bookStore = clone(_bookStore);
 
+    // 店員
     var clerk =clone(_clerk);
 
     async.waterfall([
